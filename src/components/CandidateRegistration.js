@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Navbar from "./Navbar";
 // Base styles for the component
 const alertMessage = {
   marginTop: "5px",
@@ -151,120 +151,126 @@ function CandidateRegistration() {
   }, [candidates]);
 
   return (
-    <div style={centerContainerStyle}>
-      <div style={formBoxStyle}>
-        <div data-testid="registration-component" style={formBoxStyle}>
-          <form onSubmit={handleFormSubmit}>
-            <div className="form-group" style={formGroupStyle}>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                placeholder="Name"
-                required
-                style={inputStyle}
-                data-testid="form-input-name"
-                onChange={(e) => {
-                  registrationStatus && setRegistrationStatus(null);
-                  setFormData({ ...formData, name: e.target.value });
-                }}
-                // onChange={() => {}} - Hint: Implement this
-              />
-            </div>
-            <div className="form-group" style={formGroupStyle}>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) => {
-                  registrationStatus && setRegistrationStatus(null);
-                  setFormData({ ...formData, email: e.target.value });
-                }}
-                // onChange={() => {}} - Hint: Implement this
-                placeholder="Email"
-                data-testid="form-input-name"
-                required
-                style={{ ...inputStyle, ...(highlightInput ? highlight : {}) }}
-              />
-            </div>
-            <div className="form-group" style={formGroupStyle}>
-              <input
-                type="text"
-                name="role"
-                value={formData.role}
-                onChange={(e) => {
-                  registrationStatus && setRegistrationStatus(null);
-                  setFormData({ ...formData, role: e.target.value });
-                }}
-                // onChange={() => {}} - Hint: Implement this
-                placeholder="Role"
-                required
-                style={inputStyle}
-              />
-            </div>
-            <div className="form-group" style={formGroupStyle}>
-              <input
-                data-testid="form-input-skill"
-                type="text"
-                name="skill"
-                value={formData.skill}
-                placeholder="Skill"
-                style={inputStyle}
-                onChange={(e) => {
-                  registrationStatus && setRegistrationStatus(null);
-                  setFormData({ ...formData, skill: e.target.value });
-                }}
-              />
-              <button
-                type="button"
-                data-testid="add-btn"
-                style={addSkillButtonStyle}
-                onClick={() => handleAddSkill()}
-              >
-                Add Skill
-              </button>
-            </div>
-            <div>
-              {formData.skills.map((skill, index) => (
-                <span
-                  key={index + skill}
-                  data-testid="skill-tag"
-                  style={skillTagStyle}
+    <>
+      <Navbar candidateCount={candidates.length} />
+      <div style={centerContainerStyle}>
+        <div style={formBoxStyle}>
+          <div data-testid="registration-component" style={formBoxStyle}>
+            <form onSubmit={handleFormSubmit}>
+              <div className="form-group" style={formGroupStyle}>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  placeholder="Name"
+                  required
+                  style={inputStyle}
+                  data-testid="form-input-name"
+                  onChange={(e) => {
+                    registrationStatus && setRegistrationStatus(null);
+                    setFormData({ ...formData, name: e.target.value });
+                  }}
+                  // onChange={() => {}} - Hint: Implement this
+                />
+              </div>
+              <div className="form-group" style={formGroupStyle}>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) => {
+                    registrationStatus && setRegistrationStatus(null);
+                    setFormData({ ...formData, email: e.target.value });
+                  }}
+                  // onChange={() => {}} - Hint: Implement this
+                  placeholder="Email"
+                  data-testid="form-input-name"
+                  required
+                  style={{
+                    ...inputStyle,
+                    ...(highlightInput ? highlight : {}),
+                  }}
+                />
+              </div>
+              <div className="form-group" style={formGroupStyle}>
+                <input
+                  type="text"
+                  name="role"
+                  value={formData.role}
+                  onChange={(e) => {
+                    registrationStatus && setRegistrationStatus(null);
+                    setFormData({ ...formData, role: e.target.value });
+                  }}
+                  // onChange={() => {}} - Hint: Implement this
+                  placeholder="Role"
+                  required
+                  style={inputStyle}
+                />
+              </div>
+              <div className="form-group" style={formGroupStyle}>
+                <input
+                  data-testid="form-input-skill"
+                  type="text"
+                  name="skill"
+                  value={formData.skill}
+                  placeholder="Skill"
+                  style={inputStyle}
+                  onChange={(e) => {
+                    registrationStatus && setRegistrationStatus(null);
+                    setFormData({ ...formData, skill: e.target.value });
+                  }}
+                />
+                <button
+                  type="button"
+                  data-testid="add-btn"
+                  style={addSkillButtonStyle}
+                  onClick={() => handleAddSkill()}
                 >
-                  {skill}
-                </span>
-              ))}
-            </div>
-            <div style={buttonGroupStyle}>
-              <button
-                data-testid="submit-btn"
-                type="submit"
-                style={sharpEdgeButtonStyle}
-                disabled={formData.skills.length === 0}
-              >
-                Register
-              </button>
-              <button
-                data-testid="reset-btn"
-                type="button"
-                style={sharpEdgeButtonStyle}
-                onClick={handleReset}
-              >
-                Reset
-              </button>
-            </div>
-          </form>
-          {registrationStatus &&
-          // Hint: Implement this
-          registrationStatus === 1 ? (
-            <div style={alertMessage}>Candidate profile created</div>
-          ) : registrationStatus === 2 ? (
-            <div style={alertMessage}>Email already exists</div>
-          ) : null}
-          {/* //console.log(registrationStatus)} */}
+                  Add Skill
+                </button>
+              </div>
+              <div>
+                {formData.skills.map((skill, index) => (
+                  <span
+                    key={index + skill}
+                    data-testid="skill-tag"
+                    style={skillTagStyle}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <div style={buttonGroupStyle}>
+                <button
+                  data-testid="submit-btn"
+                  type="submit"
+                  style={sharpEdgeButtonStyle}
+                  disabled={formData.skills.length === 0}
+                >
+                  Register
+                </button>
+                <button
+                  data-testid="reset-btn"
+                  type="button"
+                  style={sharpEdgeButtonStyle}
+                  onClick={handleReset}
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+            {registrationStatus &&
+            // Hint: Implement this
+            registrationStatus === 1 ? (
+              <div style={alertMessage}>Candidate profile created</div>
+            ) : registrationStatus === 2 ? (
+              <div style={alertMessage}>Email already exists</div>
+            ) : null}
+            {/* //console.log(registrationStatus)} */}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

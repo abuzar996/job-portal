@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
 import ProfileCard from "./ProfileCard";
 // Base styles for the component
 const searchContainerStyle = {
@@ -72,90 +73,107 @@ function CandidateList() {
     const storedCandidates = localStorage.getItem("candidates");
     if (storedCandidates) {
       // Hint: Implement this
+      /////////////////////////////////////////////////////////
       setCandidates(JSON.parse(storedCandidates));
+      /////////////////////////////////////////////////////////
     }
   }, []);
 
   const handleSearch = () => {
+    ///////////////////////////////////////////////////////
     if (searchText !== "") {
       let data = candidates.filter((candidate) =>
         candidate.skills.includes(searchText)
       );
       setFilteredCandidates(data);
     }
+    /////////////////////////////////////////////////////
     // Hint: Implement this
   };
 
   const handleListAll = () => {
+    //////////////////////////////////////////////
     setSearchText("");
     setFilteredCandidates([]);
+    ///////////////////////////////////////////////
     // Hint: Implement this
   };
 
   return (
-    <div style={{ ...searchContainerStyle, alignItems: "center" }}>
-      <div style={searchBoxContainerStyle}>
-        <input
-          type="text"
-          placeholder="search skills"
-          value={searchText}
-          style={searchBoxStyle}
-          onChange={(e) => setSearchText(e.target.value)}
-          //Hint: Implement this
-        />
-        <button style={searchButtonStyle} onClick={handleSearch}>
-          Search Button
-        </button>
-        <button
-          data-testid="candidate-card"
-          style={listAllButtonStyle}
-          onClick={handleListAll}
-        >
-          List All
-        </button>
-      </div>
+    <>
+      <Navbar />
+      <div style={{ ...searchContainerStyle, alignItems: "center" }}>
+        <div style={searchBoxContainerStyle}>
+          <input
+            type="text"
+            placeholder="search skills"
+            value={searchText}
+            style={searchBoxStyle}
+            onChange={(e) => setSearchText(e.target.value)}
+            //Hint: Implement this
+          />
+          <button style={searchButtonStyle} onClick={handleSearch}>
+            Search Button
+          </button>
+          <button
+            data-testid="candidate-card"
+            style={listAllButtonStyle}
+            onClick={handleListAll}
+          >
+            List All
+          </button>
+        </div>
 
-      {filteredCandidates.length === 0 ? (
-        <div style={{ height: "800px", width: "100%", overflow: "scroll" }}>
-          {candidates.map((candidate, index) => (
-            <ProfileCard candidate={candidate} key={index} />
-          ))}
-        </div>
-      ) : (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-          }}
-        >
-          {filteredCandidates.map((candidate, index) => (
-            <div
-              key={candidate.id}
-              style={{
-                ...profileCardStyle,
-                textAlign: "left",
-                marginRight: "10px",
-              }}
-            >
-              <h2 style={{ marginBottom: "10px" }}>Role: {candidate.role}</h2>
-              <p>Name: {candidate.name}</p>
-              <p>Email: {candidate.email}</p>
-              <div>
-                <p style={{ fontWeight: "bold" }}>Skills</p>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
-                  {candidate.skills.map((skill, index2) => (
-                    <div key={index} style={skillsStyle}>
-                      {skill}
+        {filteredCandidates.length === 0 ? (
+          /////////////////////////////////////////////////////
+          <div style={{ height: "800px", width: "100%", overflow: "scroll" }}>
+            {candidates.map((candidate, index) => (
+              <ProfileCard candidate={candidate} key={index} />
+            ))}
+          </div>
+        ) : (
+          //////////////////////////////////////////////////////
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+            }}
+          >
+            {
+              ////////////////////////////////////////////////////////////
+              filteredCandidates.map((candidate, index) => (
+                <div
+                  key={candidate.id}
+                  style={{
+                    ...profileCardStyle,
+                    textAlign: "left",
+                    marginRight: "10px",
+                  }}
+                >
+                  <h2 style={{ marginBottom: "10px" }}>
+                    Role: {candidate.role}
+                  </h2>
+                  <p>Name: {candidate.name}</p>
+                  <p>Email: {candidate.email}</p>
+                  <div>
+                    <p style={{ fontWeight: "bold" }}>Skills</p>
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                      {candidate.skills.map((skill, i) => (
+                        <div key={i} style={skillsStyle}>
+                          {skill}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+              ))
+              //////////////////////////////////////////////////////////////////////////
+            }
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

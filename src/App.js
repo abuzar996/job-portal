@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import CandidateRegistration from "./components/CandidateRegistration";
 import CandidateList from "./components/CandidateList";
 import Navbar from "./components/Navbar";
+
 const router = createBrowserRouter([
   {
     path: "/candidate",
@@ -12,7 +13,6 @@ const router = createBrowserRouter([
         path: "registration",
         element: (
           <>
-            <Navbar />
             <CandidateRegistration />
           </>
         ),
@@ -21,7 +21,6 @@ const router = createBrowserRouter([
         path: "list",
         element: (
           <>
-            <Navbar />
             <CandidateList />
           </>
         ),
@@ -32,12 +31,12 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <Navbar />
         <Home />
       </>
     ),
   },
 ]);
+
 function App() {
   return (
     <>

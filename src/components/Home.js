@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const homeStyle = {
   display: "flex",
@@ -29,21 +30,24 @@ const buttonStyle = {
 
 function Home() {
   return (
-    <div data-testid="home-component" style={homeStyle}>
-      <div style={buttonContainerStyle}>
-        {/* Hint: Implement this */}
-        <Link to="/candidate/registration">
-          <button data-testid="register-button" style={buttonStyle}>
-            Register Candidate
-          </button>
-        </Link>
-        <Link to="/candidate/list">
-          <button data-testid="list-button" style={buttonStyle}>
-            List Candidates
-          </button>
-        </Link>
+    <>
+      <Navbar />
+      <div data-testid="home-component" style={homeStyle}>
+        <div style={buttonContainerStyle}>
+          {/* Hint: Implement this */}
+          <Link to="/candidate/registration">
+            <button data-testid="register-button" style={buttonStyle}>
+              Register Candidate
+            </button>
+          </Link>
+          <Link to="/candidate/list">
+            <button data-testid="list-button" style={buttonStyle}>
+              List Candidates
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

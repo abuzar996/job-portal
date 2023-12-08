@@ -28,7 +28,6 @@ function Navbar({ candidateCount }) {
   const [currentPage, setCurrentPage] = React.useState(location.pathname);
 
   useLocation().pathname !== currentPage && setCurrentPage(location.pathname);
-
   return (
     <div style={navbarStyle}>
       <div style={centerHeadingStyle}>
@@ -36,20 +35,22 @@ function Navbar({ candidateCount }) {
           Job Portal
         </h1>
       </div>
-      <div>
-        <Link to="/" style={linkStyle}>
-          Home
-        </Link>
-        {currentPage === "/candidate/registration" ? (
-          <Link to="/candidate/list" style={linkStyle}>
-            Candidate List {candidateCount}
+      {currentPage !== "/" && (
+        <div>
+          <Link to="/" style={linkStyle}>
+            Home
           </Link>
-        ) : (
-          <Link to="/candidate/registration" style={linkStyle}>
-            Candidate Registration
-          </Link>
-        )}
-      </div>
+          {currentPage === "/candidate/registration" ? (
+            <Link to="/candidate/list" style={linkStyle}>
+              Candidate List {candidateCount}
+            </Link>
+          ) : (
+            <Link to="/candidate/registration" style={linkStyle}>
+              Candidate Registration
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   );
 }
