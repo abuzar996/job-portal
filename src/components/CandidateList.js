@@ -109,6 +109,7 @@ function CandidateList() {
             placeholder="search skills"
             value={searchText}
             style={searchBoxStyle}
+            //////////////////////
             onChange={(e) => setSearchText(e.target.value)}
             //Hint: Implement this
           />
@@ -118,6 +119,7 @@ function CandidateList() {
           <button
             data-testid="candidate-card"
             style={listAllButtonStyle}
+            ////////////////////////
             onClick={handleListAll}
           >
             List All

@@ -35,19 +35,25 @@ function Navbar({ candidateCount }) {
           Job Portal
         </h1>
       </div>
+      {/* ////////////////////// */}
       {currentPage !== "/" && (
+        ////////////////////////////////////////////////////////////////
         <div>
           <Link to="/" style={linkStyle}>
             Home
           </Link>
-          {currentPage === "/candidate/registration" ? (
-            <Link to="/candidate/list" style={linkStyle}>
-              Candidate List {candidateCount}
-            </Link>
-          ) : (
-            <Link to="/candidate/registration" style={linkStyle}>
-              Candidate Registration
-            </Link>
+          {currentPage !== "/" && (
+            <>
+              {currentPage === "/candidate/registration" ? (
+                <Link to="/candidate/list" style={linkStyle}>
+                  Candidate List {candidateCount}
+                </Link>
+              ) : (
+                <Link to="/candidate/registration" style={linkStyle}>
+                  Candidate Registration
+                </Link>
+              )}
+            </>
           )}
         </div>
       )}
